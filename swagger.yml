@@ -1,0 +1,59 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: Managing Hierarchical Data
+  description: Managing Hierarchical Data through python, Flask and mysql
+
+schemes:
+  - http
+host: localhost:5000
+
+paths:
+  /getL:
+      get:
+        summary: Gets 
+        description: Get all elements
+        responses:
+          200:
+            description: A list of elements
+            schema:
+              type: array
+              items:
+                required:
+                  - username
+                properties:
+                  id:
+                    type: integer
+                  Name:
+                    type: string
+                  level:
+                    type: integer
+  /add:
+     post:
+      summary: Adds new name in Hierarchical list
+      description: Adds new name in Hierarchical list
+      parameters:
+       - name: name
+         in: query
+         description: Name of the new item
+         type: string
+       - name: parent
+         in: query
+         description: Parent(id) of element
+         type: integer
+      responses:
+        204:
+          description: succesfully 
+  /dell:
+    delete:
+      summary: delete element
+      description: delete element from Hierarchical list
+      parameters:
+       - name: d
+         in: query
+         description: Number(id) of persons deleted
+         type: integer
+      responses:
+        204:
+          description: succesfully deleted.
