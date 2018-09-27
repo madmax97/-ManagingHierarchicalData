@@ -7,7 +7,7 @@ config = {
         'user': 'root',
         'password': 'root',
         'host': 'db',
-        'port': '3310',
+        'port': '3306',
         'database': 'Maxim'
     }
 
@@ -15,7 +15,6 @@ config = {
 db = mysql.connector.connect(**config)
 
 app = Flask(__name__)
-
 
 
 def filtr(g):
@@ -26,6 +25,7 @@ def filtr(g):
         g = g[1:]
     print(g)
     return g
+
 
 def find(p, n):
     cursor = db.cursor()
@@ -38,6 +38,7 @@ def find(p, n):
             return False
     return True
 
+
 @app.route('/getL')
 def getL():
     cursor = db.cursor()
@@ -45,6 +46,7 @@ def getL():
     cursor.execute(sql)
     results = cursor.fetchall()
     return str(results)
+
 
 @app.route("/add")
 def add():
@@ -66,6 +68,7 @@ def add():
         return "Logged in successfully"
     else:
         return "Данное значение уже есть"
+
 
 @app.route("/dell")
 def dell():

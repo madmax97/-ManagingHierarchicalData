@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services:
   app:
     build: ./app
@@ -9,8 +9,9 @@ services:
 
   db:
     image: mysql
+    restart: always
     ports:
-      - "32000:3310"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: "root"
     volumes:
