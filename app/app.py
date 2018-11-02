@@ -21,26 +21,23 @@ def filtr(g):
     pattern = r'[^\w+]'
     g = re.sub(pattern, ' ' , g)
     g = re.sub('_', ' ' , g)
-    if g[0] == ' ':
-        g = g[1:]
-    print(g)
+    g = g[1:] if g[0] == ' '
     return g
 
 
-def find(p, n):
+def find(id_t, number_el):
     cursor = db.cursor()
-    cursor.execute("SELECT @myLeft := lft, @myRight := rgt FROM nested_category WHERE id = '{0}';".format(p))
+    cursor.execute("SELECT @myLeft := lft, @myRight := rgt FROM nested_category WHERE id = '{0}';".format(id_t))
     cursor.execute("SELECT name FROM nested_category WHERE BETWEEN @myLeft AND @myRight;")
-    nam = cursor.fetchone()
-    print(nam)
-    for x in nam:
-        if x == n:
+    number_table = cursor.fetchone()
+    for x in number_table:
+        if x == number_el:
             return False
     return True
 
 
-@app.route('/getL')
-def getL():
+@app.route('/get_l')
+def get_l():
     cursor = db.cursor()
     sql = "SELECT * FROM nested_category"
     cursor.execute(sql)
@@ -88,7 +85,6 @@ def dell():
     data = cursor.fetchone()
     return str(data)
 
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
-
-
